@@ -17,14 +17,13 @@ class Responder(
 
     fun sendMessage(request: NewMessageRequest) {
         val message = "Вы сказали: ${request.messageObject.message.text}"
-        val randomId = 0
 
         webClient
             .post()
             .uri { uriBuilder ->
                 uriBuilder.path("messages.send")
                     .queryParam("peer_id", request.messageObject.message.peerId)
-                    .queryParam("random_id", randomId)
+                    .queryParam("random_id", RANDOM_ID)
                     .queryParam("message", message)
                     .queryParam("group_id", request.groupId)
                     .queryParam("access_token", accessToken)
@@ -35,5 +34,9 @@ class Responder(
             .bodyToMono(String::class.java)
             .doOnError { error -> logger.error("Error occurred: ${error.message}") }
             .subscribe { response -> logger.info("Response: $response") }
+    }
+
+    companion object {
+        const val RANDOM_ID = 0
     }
 }

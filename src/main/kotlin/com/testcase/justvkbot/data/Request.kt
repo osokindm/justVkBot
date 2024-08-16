@@ -13,4 +13,4 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
     JsonSubTypes.Type(value = ConfirmationRequest::class, name = "confirmation"),
     JsonSubTypes.Type(value = NewMessageRequest::class, name = "message_new")
 )
-open class Request
+sealed class Request

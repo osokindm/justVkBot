@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 @RequiredArgsConstructor
 class GlobalExceptionHandler(private val logger: Logger) {
 
-
     @ExceptionHandler(Exception::class)
     fun handleExceptions(ex: Exception): ResponseEntity<ErrorResponse> {
         logger.error("Error during processing files: ", ex)
